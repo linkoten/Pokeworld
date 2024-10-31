@@ -29,17 +29,17 @@ const apiCategories = [
       {
         title: "Pokedexes",
         endpoint: "https://pokeapi.co/api/v2/pokedex",
-        path: "/dashboard/pokedexes",
+        path: "/dashboard/generations/pokedexes",
       },
       {
         title: "Versions",
         endpoint: "https://pokeapi.co/api/v2/version",
-        path: "/dashboard/versions",
+        path: "/dashboard/generations/versions",
       },
       {
         title: "Version Groups",
         endpoint: "https://pokeapi.co/api/v2/version-group",
-        path: "/dashboard/version-groups",
+        path: "/dashboard/generations/version-groups",
       },
     ],
   },
@@ -50,22 +50,22 @@ const apiCategories = [
       {
         title: "Locations",
         endpoint: "https://pokeapi.co/api/v2/location",
-        path: "/dashboard/locations",
+        path: "/dashboard/locations/locations",
       },
       {
         title: "Location Areas",
         endpoint: "https://pokeapi.co/api/v2/location-area",
-        path: "/dashboard/location-areas",
+        path: "/dashboard/locations/location-areas",
       },
       {
         title: "Pal Park Areas",
         endpoint: "https://pokeapi.co/api/v2/pal-park-area",
-        path: "/dashboard/pal-park-areas",
+        path: "/dashboard/locations/pal-park-areas",
       },
       {
         title: "Regions",
         endpoint: "https://pokeapi.co/api/v2/region",
-        path: "/dashboard/regions",
+        path: "/dashboard/locations/regions",
       },
     ],
   },
@@ -73,7 +73,7 @@ const apiCategories = [
 
 export default function AppSidebar() {
   return (
-    <Sidebar className="w-64 border-r">
+    <Sidebar className=" border-r">
       <SidebarHeader className="p-4">
         <h2 className="text-2xl font-bold">PokeWorld</h2>
       </SidebarHeader>

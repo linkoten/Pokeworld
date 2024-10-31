@@ -1,9 +1,9 @@
-import PokemonList from "./components/Pokemon-List";
+import PokemonList from "./components/Data-List";
 
 export default function Page() {
   return (
     <div className="p-24">
-      <PokemonList />
+      <PokemonList url="pokemon" />
     </div>
   );
 }

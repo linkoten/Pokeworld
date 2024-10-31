@@ -11,27 +11,29 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 
-interface Pokemon {
+interface Data {
   name: string;
   url: string;
 }
 
-export default function PokemonList() {
-  const [pokemons, setPokemons] = useState([]);
+export default function DataList({ url }: { url: string }) {
+  const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
+  console.log(url);
+
   useEffect(() => {
-    fetchPokemons(currentPage);
+    fetchData(currentPage);
   }, [currentPage]);
 
-  async function fetchPokemons(page: number) {
+  async function fetchData(page: number) {
     const offset = (page - 1) * 20;
     const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=20`
+      `https://pokeapi.co/api/v2/${url}?offset=${offset}&limit=20`
     );
     const data = await response.json();
-    setPokemons(data.results);
+    setData(data.results);
     setTotalPages(Math.ceil(data.count / 20));
   }
 
@@ -46,7 +48,7 @@ export default function PokemonList() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {pokemons.map((pokemon: Pokemon, index: number) => (
+          {data.map((pokemon: Data, index: number) => (
             <TableRow key={pokemon.name}>
               <TableCell>{(currentPage - 1) * 20 + index + 1}</TableCell>
               <TableCell className="font-medium">{pokemon.name}</TableCell>
