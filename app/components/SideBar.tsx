@@ -24,22 +24,22 @@ const apiCategories = [
       {
         title: "Generations",
         endpoint: "https://pokeapi.co/api/v2/generation",
-        path: "/dashboard/generations",
+        path: "/dashboard/generation",
       },
       {
         title: "Pokedexes",
         endpoint: "https://pokeapi.co/api/v2/pokedex",
-        path: "/dashboard/generations/pokedexes",
+        path: "/dashboard/pokedexes",
       },
       {
         title: "Versions",
         endpoint: "https://pokeapi.co/api/v2/version",
-        path: "/dashboard/generations/versions",
+        path: "/dashboard/versions",
       },
       {
         title: "Version Groups",
         endpoint: "https://pokeapi.co/api/v2/version-group",
-        path: "/dashboard/generations/version-groups",
+        path: "/dashboard/version-groups",
       },
     ],
   },
@@ -50,22 +50,22 @@ const apiCategories = [
       {
         title: "Locations",
         endpoint: "https://pokeapi.co/api/v2/location",
-        path: "/dashboard/locations/locations",
+        path: "/dashboard/locations",
       },
       {
         title: "Location Areas",
         endpoint: "https://pokeapi.co/api/v2/location-area",
-        path: "/dashboard/locations/location-areas",
+        path: "/dashboard/location-areas",
       },
       {
         title: "Pal Park Areas",
         endpoint: "https://pokeapi.co/api/v2/pal-park-area",
-        path: "/dashboard/locations/pal-park-areas",
+        path: "/dashboard/pal-park-areas",
       },
       {
         title: "Regions",
         endpoint: "https://pokeapi.co/api/v2/region",
-        path: "/dashboard/locations/regions",
+        path: "/dashboard/regions",
       },
     ],
   },

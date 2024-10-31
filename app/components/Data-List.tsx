@@ -10,18 +10,19 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface Data {
   name: string;
   url: string;
 }
 
-export default function DataList({ url }: { url: string }) {
+export default function DataList({ endpoint }: { endpoint: string }) {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
-  console.log(url);
+  console.log("un url", endpoint);
 
   useEffect(() => {
     fetchData(currentPage);
@@ -30,7 +31,7 @@ export default function DataList({ url }: { url: string }) {
   async function fetchData(page: number) {
     const offset = (page - 1) * 20;
     const response = await fetch(
-      `https://pokeapi.co/api/v2/${url}?offset=${offset}&limit=20`
+      `https://pokeapi.co/api/v2/${endpoint}?offset=${offset}&limit=20`
     );
     const data = await response.json();
     setData(data.results);
@@ -48,11 +49,16 @@ export default function DataList({ url }: { url: string }) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((pokemon: Data, index: number) => (
-            <TableRow key={pokemon.name}>
+          {data.map((data: Data, index: number) => (
+            <TableRow key={data.name}>
               <TableCell>{(currentPage - 1) * 20 + index + 1}</TableCell>
-              <TableCell className="font-medium">{pokemon.name}</TableCell>
-              <TableCell>{pokemon.url}</TableCell>
+              <TableCell className="font-medium">{data.name}</TableCell>
+              <TableCell>
+                {" "}
+                <Link href={`/dashboard/${endpoint}/${index + 1}`}>
+                  {data.url}
+                </Link>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
