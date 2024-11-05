@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -46,6 +46,7 @@ interface PokemonData {
   moves: Array<{
     move: {
       url: string;
+      name: string;
     };
   }>;
   species: {

@@ -69,6 +69,7 @@ interface PokemonData {
   moves: Array<{
     move: {
       url: string;
+      name: string;
     };
   }>;
   species: {
@@ -94,6 +95,33 @@ interface EvolutionData {
         };
       }>;
     }>;
+  };
+}
+
+interface MoveData {
+  name: string; // Nom du mouvement
+  type: {
+    name: string;
+    url: string; // URL vers les informations détaillées du type
+  };
+  power: number | null; // Puissance du mouvement
+  accuracy: number | null; // Précision du mouvement
+  pp: number; // Nombre d'utilisations du mouvement
+  effect_entries: Array<{
+    effect: string; // Effet du mouvement (version courte)
+    short_effect: string; // Effet du mouvement (version abrégée)
+  }>;
+  damage_class: {
+    name: string; // Classe de dégâts (physique, spécial)
+  };
+  meta: {
+    ailment: {
+      name: string; // Malus infligé (paralysie, brûlure, etc.)
+    };
+    min_hits: number | null; // Nombre minimum de coups
+    max_hits: number | null; // Nombre maximum de coups
+    min_turns: number | null; // Nombre minimum de tours
+    max_turns: number | null; // Nombre maximum de tours
   };
 }
 
@@ -145,7 +173,7 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
   );
   const [isMovesOpen, setIsMovesOpen] = useState(false);
   const [evolution, setEvolution] = useState<EvolutionData | null>(null);
-  const [moves, setMoves] = useState<any[]>([]);
+  const [moves, setMoves] = useState<MoveData[]>([]);
 
   const imageRef = useRef<HTMLImageElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
@@ -205,8 +233,8 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
 
   const fetchMoves = async () => {
     try {
-      const movePromises = pokemon.moves.map(({ move }) =>
-        fetch(move.url).then((res) => res.json())
+      const movePromises = pokemon.moves.map(
+        ({ move }) => fetch(move.url).then((res) => res.json()) // Type assertion
       );
       const moveData = await Promise.all(movePromises);
       setMoves(moveData);
@@ -309,7 +337,7 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
 
   const mainType = pokemon.types[0].type.name;
 
-  let cardStyle = {
+  const cardStyle = {
     border: borderColors[`${mainType}` as keyof typeof borderColors],
     background:
       backgroundColors[`${mainType}` as keyof typeof backgroundColors],
