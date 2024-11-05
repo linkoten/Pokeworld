@@ -50,22 +50,22 @@ const apiCategories = [
       {
         title: "Locations",
         endpoint: "https://pokeapi.co/api/v2/location",
-        path: "/dashboard/locations",
+        path: "/dashboard/location",
       },
       {
         title: "Location Areas",
         endpoint: "https://pokeapi.co/api/v2/location-area",
-        path: "/dashboard/location-areas",
+        path: "/dashboard/location-area",
       },
       {
         title: "Pal Park Areas",
         endpoint: "https://pokeapi.co/api/v2/pal-park-area",
-        path: "/dashboard/pal-park-areas",
+        path: "/dashboard/pal-park-area",
       },
       {
         title: "Regions",
         endpoint: "https://pokeapi.co/api/v2/region",
-        path: "/dashboard/regions",
+        path: "/dashboard/region",
       },
     ],
   },
