@@ -6,53 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PokemonCard from "./PokemonCard";
 import gsap from "gsap";
-
-interface PokemonData {
-  id: number;
-  name: string;
-  sprites: {
-    front_default: string;
-    other: {
-      "official-artwork": {
-        front_default: string;
-      };
-    };
-    versions: {
-      [key: string]: {
-        [key: string]: {
-          front_default: string;
-        };
-      };
-    };
-  };
-  types: Array<{
-    type: {
-      name: string;
-    };
-  }>;
-  stats: Array<{
-    base_stat: number;
-    stat: {
-      name: string;
-    };
-  }>;
-  height: number;
-  weight: number;
-  abilities: Array<{
-    ability: {
-      name: string;
-    };
-  }>;
-  moves: Array<{
-    move: {
-      url: string;
-      name: string;
-    };
-  }>;
-  species: {
-    url: string;
-  };
-}
+import { PokemonData } from "@/app/types/type";
 
 export default function PokemonCarousel({
   initialPokemon,

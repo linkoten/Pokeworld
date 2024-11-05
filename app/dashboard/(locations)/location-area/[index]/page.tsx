@@ -1,8 +1,8 @@
-import FetchPokemon from "@/app/components/pokemon/FetchData";
+import FetchLocationArea from "@/app/components/location/FetchLocationArea";
 
 export default function Page({ params }: { params: { index: string } }) {
   const url = "location-area";
   const completeUrl = `https://pokeapi.co/api/v2/${url}/${params.index}`;
 
-  return <FetchPokemon url={completeUrl} />;
+  return <FetchLocationArea url={completeUrl} />;
 }

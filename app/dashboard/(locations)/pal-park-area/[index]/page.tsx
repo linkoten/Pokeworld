@@ -1,7 +1,13 @@
-import DataList from "@/app/components/Data-List";
-import React from "react";
+import FetchPalParkArea from "@/app/components/location/FetchPalParkArea";
 
-export default function page() {
-  const endpoint = "pal-park-area";
-  return <DataList endpoint={endpoint} />;
+export default function Page({ params }: { params: { index: string } }) {
+  const url = "pal-park-area";
+  const completeUrl = `https://pokeapi.co/api/v2/${url}/${params.index}`;
+
+  return (
+    <>
+      <div className=" text-center"> Pal-Park Area N° {params.index}</div>
+      <FetchPalParkArea url={completeUrl} />
+    </>
+  );
 }

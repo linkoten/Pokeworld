@@ -7,38 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import gsap from "gsap";
-
-interface PokemonDetails {
-  id: number;
-  name: string;
-  types: Array<{ type: { name: string } }>;
-  sprites: { front_default: string };
-}
-
-interface GenerationData {
-  pokemon_species: Array<{ name: string }>;
-}
-
-const typeColors = {
-  normal: "bg-zinc-500",
-  fire: "bg-orange-500",
-  water: "bg-blue-500",
-  electric: "bg-yellow-500",
-  grass: "bg-green-500",
-  ice: "bg-cyan-500",
-  fighting: "bg-red-500",
-  poison: "bg-purple-500",
-  ground: "bg-amber-500",
-  flying: "bg-indigo-500",
-  psychic: "bg-pink-500",
-  bug: "bg-lime-500",
-  rock: "bg-stone-500",
-  ghost: "bg-violet-500",
-  dragon: "bg-teal-500",
-  dark: "bg-gray-500",
-  steel: "bg-slate-500",
-  fairy: "bg-rose-500",
-};
+import { GenerationData, PokemonDetails } from "@/app/types/type";
+import { backgroundColors } from "@/app/lib/constant";
 
 export default function Pokedex({
   generationData,
@@ -133,7 +103,9 @@ export default function Pokedex({
                   <Badge
                     key={type.type.name}
                     className={`${
-                      typeColors[type.type.name as keyof typeof typeColors]
+                      backgroundColors[
+                        type.type.name as keyof typeof backgroundColors
+                      ]
                     } text-white capitalize`}
                   >
                     {type.type.name}

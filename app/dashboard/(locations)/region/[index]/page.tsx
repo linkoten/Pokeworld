@@ -1,7 +1,8 @@
-import DataList from "@/app/components/Data-List";
-import React from "react";
+import FetchRegion from "@/app/components/location/FetchRegion";
 
-export default function page() {
-  const endpoint = "region";
-  return <DataList endpoint={endpoint} />;
+export default function Page({ params }: { params: { index: string } }) {
+  const url = "region";
+  const completeUrl = `https://pokeapi.co/api/v2/${url}/${params.index}`;
+
+  return <FetchRegion url={completeUrl} />;
 }
