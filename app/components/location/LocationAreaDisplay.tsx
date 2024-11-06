@@ -6,21 +6,21 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { LocationAreaData } from "@/app/types/type";
+import { LocationAreaData, Pokemon } from "@/app/types/type";
 
 export default function LocationAreaDisplay({
   areaData,
 }: {
   areaData: LocationAreaData;
 }) {
-  const [pokemonDetails, setPokemonDetails] = useState<{ [key: string]: any }>(
-    {}
-  );
+  const [pokemonDetails, setPokemonDetails] = useState<{
+    [key: string]: Pokemon;
+  }>({});
   const router = useRouter();
 
   useEffect(() => {
     const fetchPokemonDetails = async () => {
-      const details: { [key: string]: any } = {};
+      const details: { [key: string]: Pokemon } = {};
       for (const encounter of areaData.pokemon_encounters) {
         const response = await fetch(
           `https://pokeapi.co/api/v2/pokemon/${encounter.pokemon.name}`
