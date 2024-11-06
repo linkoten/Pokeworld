@@ -46,7 +46,7 @@ export default function RegionDisplay({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex] = useState(0);
   const router = useRouter();
 
   useEffect(() => {
