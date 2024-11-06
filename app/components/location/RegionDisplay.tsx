@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -77,18 +76,6 @@ export default function RegionDisplay({
     if (newId > 0) {
       router.push(`/dashboard/region/${newId}`);
     }
-  };
-
-  const navigateCarousel = (direction: "prev" | "next") => {
-    setCurrentIndex((prevIndex) => {
-      if (direction === "next") {
-        return (prevIndex + 1) % regionData.version_groups.length;
-      } else {
-        return prevIndex === 0
-          ? regionData.version_groups.length - 1
-          : prevIndex - 1;
-      }
-    });
   };
 
   return (

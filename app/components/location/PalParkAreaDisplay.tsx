@@ -5,9 +5,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { PalParkAreaData } from "@/app/types/type";
+import { PalParkAreaData, Pokemon } from "@/app/types/type";
 
 const areaColors: { [key: string]: string } = {
   forest: "bg-green-50 border-green-200 border-2",
@@ -22,14 +21,14 @@ export default function PalParkAreaDisplay({
 }: {
   areaData: PalParkAreaData;
 }) {
-  const [pokemonDetails, setPokemonDetails] = useState<{ [key: string]: any }>(
-    {}
-  );
+  const [pokemonDetails, setPokemonDetails] = useState<{
+    [key: string]: Pokemon;
+  }>({});
   const router = useRouter();
 
   useEffect(() => {
     const fetchPokemonDetails = async () => {
-      const details: { [key: string]: any } = {};
+      const details: { [key: string]: Pokemon } = {};
       for (const encounter of areaData.pokemon_encounters) {
         const response = await fetch(
           `https://pokeapi.co/api/v2/pokemon/${encounter.pokemon_species.name}`

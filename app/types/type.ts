@@ -119,6 +119,14 @@ export interface PalParkAreaData {
   pokemon_encounters: PokemonEncounter[];
 }
 
+export interface Pokemon {
+  name: string;
+  sprites: {
+    front_default: string;
+  };
+  // Ajoutez d'autres propriétés si nécessaire, comme les types, les stats, etc.
+}
+
 export interface PokemonEncounter {
   pokemon: {
     name: string;

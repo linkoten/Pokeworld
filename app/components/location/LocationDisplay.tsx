@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -112,7 +112,7 @@ export default function LocationDisplay({
           </CollapsibleTrigger>
         </div>
         <CollapsibleContent className="space-y-2">
-          {locationData.areas.map((area, index) => (
+          {locationData.areas.map((area) => (
             <Card key={area.name}>
               <CardHeader>
                 <CardTitle className="text-sm">
