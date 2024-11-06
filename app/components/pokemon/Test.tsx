@@ -31,6 +31,19 @@ interface Pokemon {
   generation: number;
 }
 
+interface PokemonEntry {
+  entry_number: number;
+  pokemon_species: {
+    name: string;
+  };
+}
+
+interface PokemonType {
+  type: {
+    name: string;
+  };
+}
+
 const typeColors: { [key: string]: string } = {
   normal: "bg-gray-400",
   fire: "bg-red-500",
@@ -52,7 +65,7 @@ const typeColors: { [key: string]: string } = {
   fairy: "bg-pink-300",
 };
 
-export default function DataList({ endpoint }: { endpoint: string }) {
+export default function DataList() {
   const [allPokemon, setAllPokemon] = useState<Pokemon[]>([]);
   const [filteredPokemon, setFilteredPokemon] = useState<Pokemon[]>([]);
   const [displayedPokemon, setDisplayedPokemon] = useState<Pokemon[]>([]);
@@ -103,7 +116,7 @@ export default function DataList({ endpoint }: { endpoint: string }) {
       const pokemonEntries = data.pokemon_entries;
 
       const pokemonData = await Promise.all(
-        pokemonEntries.map(async (entry: any) => {
+        pokemonEntries.map(async (entry: PokemonEntry) => {
           const detailResponse = await fetch(
             `https://pokeapi.co/api/v2/pokemon/${entry.entry_number}`
           );
@@ -112,7 +125,7 @@ export default function DataList({ endpoint }: { endpoint: string }) {
             name: entry.pokemon_species.name,
             url: `https://pokeapi.co/api/v2/pokemon/${entry.entry_number}`,
             sprite: detail.sprites.front_default,
-            types: detail.types.map((t: any) => t.type.name),
+            types: detail.types.map((t: PokemonType) => t.type.name),
             generation: Math.floor((entry.entry_number - 1) / 151) + 1,
           };
         })
@@ -126,7 +139,7 @@ export default function DataList({ endpoint }: { endpoint: string }) {
   }
 
   function filterAndSortPokemon() {
-    let filtered = allPokemon.filter((pokemon) => {
+    const filtered = allPokemon.filter((pokemon) => {
       const pokemonIndex = parseInt(pokemon.url.split("/").slice(-1)[0]);
       const matchesSearch =
         pokemon.name.toLowerCase().includes(search.toLowerCase()) ||
