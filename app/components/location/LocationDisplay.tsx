@@ -15,22 +15,7 @@ import {
   ChevronRight,
   ChevronUp,
 } from "lucide-react";
-
-interface LocationArea {
-  name: string;
-  url: string;
-}
-
-interface LocationData {
-  id: number;
-  name: string;
-  names: Array<{ name: string; language: { name: string } }>;
-  areas: LocationArea[];
-  region: {
-    name: string;
-    url: string;
-  };
-}
+import { LocationData } from "@/app/types/type";
 
 export default function LocationDisplay({
   locationData,
@@ -44,13 +29,7 @@ export default function LocationDisplay({
     const locationName = locationData.names.find(
       (n) => n.language.name === "en"
     );
-    return locationName
-      ? locationName.name
-      : name
-          .replace(/-/g, " ")
-          .split(" ")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ");
+    return locationName ? locationName.name : name;
   };
 
   const navigateLocation = (direction: "prev" | "next") => {

@@ -366,7 +366,7 @@ export default function DataList() {
         ref={cardsRef}
       >
         {displayedPokemon.map((pokemon: Pokemon) => (
-          <Link href={pokemon.url} key={pokemon.name}>
+          <Link href={`pokemon/${pokemon.name}`} key={pokemon.name}>
             <Card className="hover:shadow-lg transition-all duration-300 transform hover:scale-105">
               <CardContent className="p-4">
                 <div className="relative w-full h-32">

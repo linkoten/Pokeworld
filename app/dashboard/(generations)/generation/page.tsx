@@ -1,7 +1,6 @@
-import DataList from "@/app/components/Data-List";
+import GenerationsData from "@/app/components/generation/GenerationsData";
 import React from "react";
 
 export default function page() {
-  const endpoint = "generation";
-  return <DataList endpoint={endpoint} />;
+  return <GenerationsData />;
 }

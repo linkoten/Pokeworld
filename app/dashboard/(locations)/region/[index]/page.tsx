@@ -1,8 +1,14 @@
-import FetchRegion from "@/app/components/location/FetchRegion";
+import RegionDisplay from "@/app/components/location/RegionDisplay";
 
-export default function Page({ params }: { params: { index: string } }) {
+export default async function Page({ params }: { params: { index: string } }) {
   const url = "region";
   const completeUrl = `https://pokeapi.co/api/v2/${url}/${params.index}`;
 
-  return <FetchRegion url={completeUrl} />;
+  const response = await fetch(completeUrl);
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  const data = await response.json();
+
+  return <RegionDisplay regionData={data} />;
 }

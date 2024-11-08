@@ -16,28 +16,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 import gsap from "gsap";
-
-interface Location {
-  name: string;
-  url: string;
-}
-
-interface VersionGroup {
-  name: string;
-  url: string;
-}
-
-interface RegionData {
-  id: number;
-  name: string;
-  names: Array<{ name: string; language: { name: string } }>;
-  locations: Location[];
-  version_groups: VersionGroup[];
-  main_generation: {
-    name: string;
-    url: string;
-  };
-}
+import { RegionData } from "@/app/types/type";
 
 export default function RegionDisplay({
   regionData,
@@ -62,13 +41,7 @@ export default function RegionDisplay({
 
   const getRegionName = (name: string) => {
     const regionName = regionData.names.find((n) => n.language.name === "en");
-    return regionName
-      ? regionName.name
-      : name
-          .replace(/-/g, " ")
-          .split(" ")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ");
+    return regionName ? regionName.name : name;
   };
 
   const navigateRegion = (direction: "prev" | "next") => {

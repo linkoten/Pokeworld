@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import gsap from "gsap";
-import { GenerationData, PokemonDetails } from "@/app/types/type";
+import { GenerationData, PokemonData } from "@/app/types/type";
 import { backgroundColors } from "@/app/lib/constant";
 
 export default function Pokedex({
@@ -15,7 +15,7 @@ export default function Pokedex({
 }: {
   generationData: GenerationData;
 }) {
-  const [pokemonList, setPokemonList] = useState<PokemonDetails[]>([]);
+  const [pokemonList, setPokemonList] = useState<PokemonData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function Pokedex({
       const pokemonDetails = await Promise.all(pokemonPromises);
       setPokemonList(
         pokemonDetails.filter(
-          (pokemon): pokemon is PokemonDetails => pokemon !== null
+          (pokemon): pokemon is PokemonData => pokemon !== null
         )
       );
       setIsLoading(false);

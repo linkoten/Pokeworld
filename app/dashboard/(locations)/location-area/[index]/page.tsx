@@ -1,8 +1,14 @@
-import FetchLocationArea from "@/app/components/location/FetchLocationArea";
+import LocationAreaDisplay from "@/app/components/location/LocationAreaDisplay";
 
-export default function Page({ params }: { params: { index: string } }) {
+export default async function Page({ params }: { params: { index: string } }) {
   const url = "location-area";
   const completeUrl = `https://pokeapi.co/api/v2/${url}/${params.index}`;
 
-  return <FetchLocationArea url={completeUrl} />;
+  const response = await fetch(completeUrl);
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  const data = await response.json();
+
+  return <LocationAreaDisplay areaData={data} />;
 }

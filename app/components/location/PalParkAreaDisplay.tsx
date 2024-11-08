@@ -6,43 +6,27 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { PalParkAreaData, Pokemon } from "@/app/types/type";
-
-const areaColors: { [key: string]: string } = {
-  forest: "bg-green-50 border-green-200 border-2",
-  field: "bg-yellow-50 border-yellow-200 border-2",
-  mountain: "bg-amber-50 border-amber-200 border-2",
-  pond: "bg-blue-50 border-blue-200 border-2",
-  sea: "bg-cyan-50 border-cyan-200 border-2",
-};
+import { AreaData, PokemonData } from "@/app/types/type";
+import { areaColors } from "@/app/lib/constant";
+import { fetchPokemonDetails2 } from "@/app/lib/fetch/fetch";
 
 export default function PalParkAreaDisplay({
   areaData,
 }: {
-  areaData: PalParkAreaData;
+  areaData: AreaData;
 }) {
   const [pokemonDetails, setPokemonDetails] = useState<{
-    [key: string]: Pokemon;
+    [key: string]: PokemonData;
   }>({});
   const router = useRouter();
 
   useEffect(() => {
-    const fetchPokemonDetails = async () => {
-      const details: { [key: string]: Pokemon } = {};
-      for (const encounter of areaData.pokemon_encounters) {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${encounter.pokemon_species.name}`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          details[encounter.pokemon_species.name] = data;
-        }
-      }
-      setPokemonDetails(details);
-    };
-
-    fetchPokemonDetails();
-  }, [areaData]);
+    async function loadPokemonDetails() {
+      const details = await fetchPokemonDetails2(areaData);
+      if (details) setPokemonDetails(details);
+    }
+    loadPokemonDetails();
+  }, []);
 
   const getAreaName = (name: string) => {
     const areaName = areaData.names.find((n) => n.language.name === "en");
@@ -92,7 +76,7 @@ export default function PalParkAreaDisplay({
                   <Image
                     src={
                       pokemonDetails[encounter.pokemon_species.name].sprites
-                        .front_default
+                        ?.front_default || "placeholder.png"
                     }
                     alt={encounter.pokemon_species.name}
                     layout="fill"

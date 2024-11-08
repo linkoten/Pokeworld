@@ -1,13 +1,19 @@
-import FetchPalParkArea from "@/app/components/location/FetchPalParkArea";
+import PalParkAreaDisplay from "@/app/components/location/PalParkAreaDisplay";
 
-export default function Page({ params }: { params: { index: string } }) {
+export default async function Page({ params }: { params: { index: string } }) {
   const url = "pal-park-area";
   const completeUrl = `https://pokeapi.co/api/v2/${url}/${params.index}`;
+
+  const response = await fetch(completeUrl);
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  const data = await response.json();
 
   return (
     <>
       <div className=" text-center"> Pal-Park Area N° {params.index}</div>
-      <FetchPalParkArea url={completeUrl} />
+      <PalParkAreaDisplay areaData={data} />
     </>
   );
 }

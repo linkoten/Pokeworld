@@ -26,21 +26,6 @@ const apiCategories = [
         endpoint: "https://pokeapi.co/api/v2/generation",
         path: "/dashboard/generation",
       },
-      {
-        title: "Pokedexes",
-        endpoint: "https://pokeapi.co/api/v2/pokedex",
-        path: "/dashboard/pokedexes",
-      },
-      {
-        title: "Versions",
-        endpoint: "https://pokeapi.co/api/v2/version",
-        path: "/dashboard/versions",
-      },
-      {
-        title: "Version Groups",
-        endpoint: "https://pokeapi.co/api/v2/version-group",
-        path: "/dashboard/version-groups",
-      },
     ],
   },
   {

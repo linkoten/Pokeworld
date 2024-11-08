@@ -6,45 +6,30 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { LocationAreaData, Pokemon } from "@/app/types/type";
+import { AreaData, PokemonData } from "@/app/types/type";
+import { fetchPokemonDetails } from "@/app/lib/fetch/fetch";
 
 export default function LocationAreaDisplay({
   areaData,
 }: {
-  areaData: LocationAreaData;
+  areaData: AreaData;
 }) {
   const [pokemonDetails, setPokemonDetails] = useState<{
-    [key: string]: Pokemon;
+    [key: string]: PokemonData;
   }>({});
   const router = useRouter();
 
   useEffect(() => {
-    const fetchPokemonDetails = async () => {
-      const details: { [key: string]: Pokemon } = {};
-      for (const encounter of areaData.pokemon_encounters) {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${encounter.pokemon.name}`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          details[encounter.pokemon.name] = data;
-        }
-      }
-      setPokemonDetails(details);
-    };
-
-    fetchPokemonDetails();
+    async function loadPokemonDetails() {
+      const details = await fetchPokemonDetails(areaData);
+      if (details) setPokemonDetails(details);
+    }
+    loadPokemonDetails();
   }, [areaData]);
 
   const getAreaName = (name: string) => {
     const areaName = areaData.names.find((n) => n.language.name === "en");
-    return areaName
-      ? areaName.name
-      : name
-          .replace(/-/g, " ")
-          .split(" ")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ");
+    return areaName ? areaName.name : name;
   };
 
   const navigateArea = (direction: "prev" | "next") => {
@@ -81,7 +66,7 @@ export default function LocationAreaDisplay({
                   <Image
                     src={
                       pokemonDetails[encounter.pokemon.name].sprites
-                        .front_default
+                        ?.front_default || "/placeholder.png" // Image de remplacement si front_default est undefined
                     }
                     alt={encounter.pokemon.name}
                     layout="fill"

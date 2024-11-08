@@ -39,3 +39,11 @@ export const borderColors = {
   steel: "border-slate-200",
   fairy: "border-rose-200",
 };
+
+export const areaColors: { [key: string]: string } = {
+  forest: "bg-green-50 border-green-200 border-2",
+  field: "bg-yellow-50 border-yellow-200 border-2",
+  mountain: "bg-amber-50 border-amber-200 border-2",
+  pond: "bg-blue-50 border-blue-200 border-2",
+  sea: "bg-cyan-50 border-cyan-200 border-2",
+};

@@ -1,3 +1,15 @@
+export interface Pokemon {
+  name: string;
+  sprites?: {
+    front_default: string;
+  };
+  url: string;
+  sprite: string;
+  types: string[];
+  index: number;
+  // Ajoutez d'autres propriétés si nécessaire, comme les types, les stats, etc.
+}
+
 export interface PokemonData {
   id: number;
   name: string;
@@ -66,15 +78,14 @@ export interface EvolutionData {
   };
 }
 
-export interface PokemonDetails {
-  id: number;
-  name: string;
-  types: Array<{ type: { name: string } }>;
-  sprites: { front_default: string };
-}
-
 export interface GenerationData {
   pokemon_species: Array<{ name: string }>;
+}
+
+export interface Generation {
+  name: string;
+  url: string;
+  starters: string[];
 }
 
 export interface MoveData {
@@ -110,24 +121,6 @@ export interface PokemonEncounter {
     name: string;
     url: string;
   };
-}
-
-export interface PalParkAreaData {
-  id: number;
-  name: string;
-  names: Array<{ name: string; language: { name: string } }>;
-  pokemon_encounters: PokemonEncounter[];
-}
-
-export interface Pokemon {
-  name: string;
-  sprites: {
-    front_default: string;
-  };
-  // Ajoutez d'autres propriétés si nécessaire, comme les types, les stats, etc.
-}
-
-export interface PokemonEncounter {
   pokemon: {
     name: string;
     url: string;
@@ -142,7 +135,34 @@ export interface PokemonEncounter {
   }>;
 }
 
-export interface LocationAreaData {
+export interface Location {
+  name: string;
+  url: string;
+}
+
+export interface LocationData {
+  id: number;
+  name: string;
+  names: Array<{ name: string; language: { name: string } }>;
+  areas: Location[];
+  region: {
+    name: string;
+    url: string;
+  };
+}
+
+export interface RegionData {
+  id: number;
+  name: string;
+  names: Array<{ name: string; language: { name: string } }>;
+  locations: Location[];
+  main_generation: {
+    name: string;
+    url: string;
+  };
+}
+
+export interface AreaData {
   id: number;
   name: string;
   names: Array<{ name: string; language: { name: string } }>;
