@@ -1,5 +1,11 @@
 import { AreaData, Pokemon, PokemonData } from "@/app/types/type";
 
+interface TypeInfo {
+  type: {
+    name: string;
+  };
+}
+
 export async function fetchGenerations() {
   try {
     const response = await fetch("https://pokeapi.co/api/v2/generation");
@@ -53,7 +59,7 @@ export async function fetchStarterData(
           name: pokemonData.name,
           url: `https://pokeapi.co/api/v2/pokemon/${pokemonData.id}`,
           sprite: pokemonData.sprites.front_default,
-          types: pokemonData.types.map((t: any) => t.type.name),
+          types: pokemonData.types.map((t: TypeInfo) => t.type.name),
           index: pokemonData.id,
         };
       })
